@@ -24,6 +24,7 @@ const AppContainer = styled.div<{ themeType: ThemeType }>`
 
 // Wrapper for the Todo section
 const TodoWrapper = styled.section<{ themeType: ThemeType }>`
+    width: 100%;
     max-width: 800px;
     padding: 20px;
     background-color: ${props => (props.themeType === 'light' ? '#fff' : '#333')};
@@ -65,7 +66,7 @@ const InputWrapper = styled.div`
         flex-direction: column;
         width: 100%;
         align-items: center;
-        gap: 8px;
+        gap: 15px;
     }
 `;
 
