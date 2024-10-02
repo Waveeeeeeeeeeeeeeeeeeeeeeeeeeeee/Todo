@@ -4,7 +4,42 @@ import { TodoContext } from '../../contexts/TodoContext/TodoContext';
 import { Task } from './Task/Task';
 import { ITodo } from '../../types/todo.model';
 import { v4 as uuidv4 } from 'uuid';
+import styled from 'styled-components';
 import { StyledButton } from '../../ui/StyledButton/StyledButton';
+
+const StyledFilterContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-start;
+    gap: 10px;
+    box-sizing: border-box;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        gap: 12px;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+    @media (max-width: 480px) {
+        gap: 5px;
+    }
+`;
+
+const StyledListContainer = styled.ul`
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0;
+    @media (max-width: 768px) {
+        padding-left: 5px;
+    }
+
+    @media (max-width: 480px) {
+        padding-left: 2px;
+    }
+`;
 
 export const Todo: React.FC<ITodo> = (props: unknown): JSX.Element | null => {
     const todoContext = useContext(TodoContext);
@@ -46,31 +81,7 @@ export const Todo: React.FC<ITodo> = (props: unknown): JSX.Element | null => {
 
     return (
         <>
-            <StyledButton
-                name='Все задачи'
-                type='submit'
-                value='Все задачи'
-                content='Все задачи'
-                onClick={() => setFilter('all')}
-                themeType={theme}
-            />
-            <StyledButton
-                name='Активные задачи'
-                type='submit'
-                value='Активные задачи'
-                content='Активные задачи'
-                onClick={() => setFilter('active')}
-                themeType={theme}
-            />
-            <StyledButton
-                name='Выполненные задачи'
-                type='submit'
-                value='Выполненные задачи'
-                content='Выполненные задачи'
-                onClick={() => setFilter('completed')}
-                themeType={theme}
-            />
-            <ul>
+            <StyledListContainer>
                 {filteredTodos.map(todo => (
                     <Task
                         status={todo.status}
@@ -82,7 +93,34 @@ export const Todo: React.FC<ITodo> = (props: unknown): JSX.Element | null => {
                         key={uuidv4()} // Используем id задачи в качестве ключа
                     />
                 ))}
-            </ul>
+            </StyledListContainer>
+
+            <StyledFilterContainer>
+                <StyledButton
+                    name='Все задачи'
+                    type='submit'
+                    value='Все задачи'
+                    content='Все задачи'
+                    onClick={() => setFilter('all')}
+                    themeType={theme}
+                />
+                <StyledButton
+                    name='Активные задачи'
+                    type='submit'
+                    value='Активные задачи'
+                    content='Активные задачи'
+                    onClick={() => setFilter('active')}
+                    themeType={theme}
+                />
+                <StyledButton
+                    name='Выполненные задачи'
+                    type='submit'
+                    value='Выполненные задачи'
+                    content='Выполненные задачи'
+                    onClick={() => setFilter('completed')}
+                    themeType={theme}
+                />
+            </StyledFilterContainer>
         </>
     );
 };

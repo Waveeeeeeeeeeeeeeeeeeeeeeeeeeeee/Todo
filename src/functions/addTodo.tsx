@@ -27,7 +27,7 @@ export const AddTodo = (props: unknown) => {
     const onAddTodo: OnClickEventType = e => {
         e.preventDefault();
         if (addTodo !== undefined) {
-            if (data.trim().length >= 3 && data.trim().length <= 20) {
+            if (data.trim().length >= 3 && data.trim().length <= 40) {
                 addTodo(data.trim()); // Добавляем задачу в контекст
                 setData(''); // Очищаем инпут после добавления
             }
@@ -43,7 +43,7 @@ export const AddTodo = (props: unknown) => {
                 placeholder='todo'
                 onChange={onChange}
                 minLength={3}
-                maxLength={20}
+                maxLength={40}
             />
 
             <StyledButton

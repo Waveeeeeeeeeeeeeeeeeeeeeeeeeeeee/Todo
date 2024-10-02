@@ -15,4 +15,18 @@ export const StyledButton = styled(Button)<{ themeType: ThemeType }>`
     &:hover {
         background-color: ${props => (props.themeType === 'light' ? '#0056b3' : '#777')};
     }
+    box-sizing: border-box;
+
+    /* Адаптивный дизайн для мобильных устройств */
+    @media (max-width: 768px) {
+        font-size: 12px;
+        padding: 8px 16px;
+        width: 150px;
+    }
+
+    @media (max-width: 480px) {
+        font-size: 10px;
+        padding: 6px 12px;
+        width: 120px;
+    }
 `;

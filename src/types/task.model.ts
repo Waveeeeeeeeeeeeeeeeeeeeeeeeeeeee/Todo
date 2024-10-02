@@ -9,5 +9,4 @@ export interface ITask {
     onToggleStatus?: (id: string) => void;
     id?: string;
     themeType?: string;
-    isCompleted?: boolean;
 }

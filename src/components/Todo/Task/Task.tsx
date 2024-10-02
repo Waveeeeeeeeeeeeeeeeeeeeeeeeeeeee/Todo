@@ -4,8 +4,32 @@ import { ThemeContext } from '../../../contexts/ThemeContext/ThemeContext';
 import { InputType } from '../../../types/input.model';
 import { ITask } from '../../../types/task.model';
 import { Checkbox } from '../../Input/Checkbox/Checkbox';
+import styled from 'styled-components';
 import { StyledButton } from '../../../ui/StyledButton/StyledButton';
 import { StyledInput } from '../../../ui/StyledInput/StyledInput';
+
+const StyledButtonContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    gap: 20px;
+    box-sizing: border-box;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        justify-content: center;
+        gap: 10px;
+        width: auto;
+    }
+`;
+
+const StyledContent = styled.span<{ isCompleted: boolean }>`
+    text-decoration: ${props => (props.isCompleted ? 'line-through' : 'none')};
+    transition: background-color 0.3s ease;
+    width: 200px;
+`;
 
 export const Task: React.FC<ITask> = ({
     content,
@@ -54,7 +78,13 @@ export const Task: React.FC<ITask> = ({
     };
 
     return (
-        <StyledTaskItem id={id?.toString()} themeType={theme} isCompleted={isCompleted}>
+        <StyledTaskItem
+            id={id?.toString()}
+            themeType={theme}
+            style={{
+                backgroundColor: isCompleted ? '#d4edda' : 'inherit', // светло-зеленый цвет для завершенных задач
+            }}
+        >
             <Checkbox type={InputType.Checkbox} checked={isCompleted} onChange={handleCheckboxChange} />
 
             {isEditing ? (
@@ -84,23 +114,25 @@ export const Task: React.FC<ITask> = ({
                 </>
             ) : (
                 <>
-                    {content}
-                    <StyledButton
-                        name='Edit'
-                        type='submit'
-                        value='Edit'
-                        content='Редактировать'
-                        onClick={handleEdit}
-                        themeType={theme}
-                    />
-                    <StyledButton
-                        name='Delete'
-                        type='submit'
-                        value='Delete'
-                        content='Удалить'
-                        onClick={handleDelete}
-                        themeType={theme}
-                    />
+                    <StyledContent isCompleted={isCompleted}>{content}</StyledContent>
+                    <StyledButtonContainer>
+                        <StyledButton
+                            name='Edit'
+                            type='submit'
+                            value='Edit'
+                            content='Редактировать'
+                            onClick={handleEdit}
+                            themeType={theme}
+                        />
+                        <StyledButton
+                            name='Delete'
+                            type='submit'
+                            value='Delete'
+                            content='Удалить'
+                            onClick={handleDelete}
+                            themeType={theme}
+                        />
+                    </StyledButtonContainer>
                 </>
             )}
         </StyledTaskItem>

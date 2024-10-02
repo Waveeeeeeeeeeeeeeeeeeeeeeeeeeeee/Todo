@@ -12,16 +12,18 @@ const AppContainer = styled.div<{ themeType: ThemeType }>`
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-
     padding: 0;
     margin: 0;
     transition: background-color 0.3s ease;
+    box-sizing: border-box;
+
+    @media (max-width: 768px) {
+        padding: 10px;
+    }
 `;
 
 // Wrapper for the Todo section
 const TodoWrapper = styled.section<{ themeType: ThemeType }>`
-    width: 100%;
     max-width: 800px;
     padding: 20px;
     background-color: ${props => (props.themeType === 'light' ? '#fff' : '#333')};
@@ -31,6 +33,24 @@ const TodoWrapper = styled.section<{ themeType: ThemeType }>`
     flex-direction: column;
     gap: 20px;
     transition: background-color 0.3s ease;
+    box-sizing: border-box;
+
+    @media (max-width: 1024px) {
+        max-width: 700px;
+        padding: 15px;
+    }
+
+    @media (max-width: 768px) {
+        max-width: 90%;
+        padding: 10px;
+        gap: 15px;
+    }
+
+    @media (max-width: 480px) {
+        max-width: 100%;
+        padding: 5px;
+        gap: 10px;
+    }
 `;
 
 const InputWrapper = styled.div`
@@ -39,13 +59,32 @@ const InputWrapper = styled.div`
     align-items: center;
     flex-direction: row;
     gap: 10px;
+    box-sizing: border-box;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+        gap: 8px;
+    }
 `;
 
 const TaskListWrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: 10px;
-    width: 80%;
+    align-items: flex-start;
+    width: 100%;
+    box-sizing: border-box;
+
+    @media (max-width: 768px) {
+        gap: 8px;
+        align-items: center;
+    }
+
+    @media (max-width: 480px) {
+        gap: 5px;
+    }
 `;
 
 const App: React.FC = () => {

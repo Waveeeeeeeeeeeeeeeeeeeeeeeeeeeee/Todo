@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 import { ThemeType } from '../../types/theme.model';
 
-export const StyledTaskItem = styled.li<{ themeType: ThemeType; isCompleted: boolean }>`
+export const StyledTaskItem = styled.li<{ themeType: ThemeType }>`
     display: flex;
-    justify-content: center;
     align-items: center;
     padding: 12px;
     border-radius: 8px;
@@ -13,11 +12,12 @@ export const StyledTaskItem = styled.li<{ themeType: ThemeType; isCompleted: boo
     transition: all 0.3s ease;
     gap: 20px;
     margin-bottom: 20px;
+    box-sizing: border-box;
 
     width: 100%;
     & .task-content {
+        text-decoration: line-through;
         flex-grow: 1;
-        text-decoration: ${props => (props.isCompleted ? 'line-through' : 'none')};
     }
 
     & .task-actions {
